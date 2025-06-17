@@ -14,6 +14,6 @@ return [
      * always no matter what the response code.
      */
     'redirect_status_codes' => [
-        \Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND
+        \Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND,
     ],
 ];

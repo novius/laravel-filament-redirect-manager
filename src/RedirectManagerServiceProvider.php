@@ -28,7 +28,7 @@ class RedirectManagerServiceProvider extends ServiceProvider
         $this->publishes([$packageDir.'/config' => config_path()], 'config');
 
         $this->publishes([
-            $packageDir.'/database/migrations' => database_path('migrations')
+            $packageDir.'/database/migrations' => database_path('migrations'),
         ], 'migrations');
 
         $this->loadTranslationsFrom($packageDir.'/lang', 'laravel-filament-redirect-manager');

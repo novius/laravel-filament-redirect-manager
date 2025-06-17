@@ -22,7 +22,7 @@ class LaravelFilamentRedirectManager implements Plugin
 
     public static function make(): self
     {
-        $instance = new self();
+        $instance = new self;
         $config = config('laravel-filament-redirect-manager', []);
         $instance->overrideResources($config['resources']);
 
