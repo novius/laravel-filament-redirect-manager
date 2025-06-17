@@ -15,10 +15,44 @@ This package provides an interface to manage redirects with [Laravel Filament Re
 
 ## Installation
 
-You can install the package via composer:
+### Composer
+
+Install the package via composer:
 
 ```bash
 composer require novius/laravel-filament-redirect-manager
+```
+
+### Filament plugin
+
+Add the `LaravelFilamentRedirectManager` plugin in your Filament Panel
+
+```php
+use Novius\LaravelFilamentRedirectManager\LaravelFilamentRedirectManager;
+
+class AdminFilamentPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            // ...
+            ->plugins([
+                // ...
+                LaravelFilamentRedirectManager::make(),
+            // ...
+            ])
+            // ...
+            ;
+    }
+}
+```
+
+### Lang files
+
+If you want to customize the lang files, you can publish them with:
+
+```bash
+php artisan vendor:publish --provider="Novius\LaravelFilamentRedirectManager\RedirectManagerServiceProvider" --tag="lang"
 ```
 
 ## Usage
@@ -30,14 +64,6 @@ To add a redirect, use the Filament interface provided by the package. You can c
 
 * Original URL (from): The relative URL to redirect (e.g., /old-url).
 * Redirection URL (to): The absolute or relative URL to redirect to (e.g., https://www.site.com/new-url or /new-url).
-
-## Lang files
-
-If you want to customize the lang files, you can publish them with:
-
-```bash
-php artisan vendor:publish --provider="Novius\LaravelFilamentRedirectManager\RedirectManagerServiceProvider" --tag="lang"
-```
 
 ## Lint
 
