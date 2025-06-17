@@ -23,6 +23,19 @@ Install the package via composer:
 composer require novius/laravel-filament-redirect-manager
 ```
 
+### Middleware
+
+Next, prepend/append the Spatie\MissingPageRedirector\RedirectsMissingPages middleware to your global middleware stack:
+
+```php
+// bootstrap/app.php
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->append([
+        \Spatie\MissingPageRedirector\RedirectsMissingPages::class,
+    ]);
+})
+```
+
 ### Filament plugin
 
 Add the `LaravelFilamentRedirectManager` plugin in your Filament Panel

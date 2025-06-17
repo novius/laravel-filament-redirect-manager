@@ -102,6 +102,6 @@ class RedirectResource extends Resource
 
     protected static function maxLengthUrl(): int
     {
-        return (int) config('laravel-filament-redirect-manager.redirect_url_max_length', 1000);
+        return (int) config('missing-page-redirector.redirect_url_max_length', 1000);
     }
 }

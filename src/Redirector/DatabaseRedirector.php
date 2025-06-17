@@ -9,7 +9,7 @@ class DatabaseRedirector implements Redirector
 {
     public function getRedirectsFor(Request $request): array
     {
-        $model = config('laravel-filament-redirect-manager.redirector_model');
+        $model = config('missing-page-redirector.redirector_model');
 
         return $model::select('to', 'from')->get()->pluck('to', 'from')->toArray();
     }

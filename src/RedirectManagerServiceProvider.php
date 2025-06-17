@@ -21,14 +21,19 @@ class RedirectManagerServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->mergeConfigFrom(
+        $this->extendConfigFrom(
             __DIR__.'/../config/laravel-filament-redirect-manager.php',
-            'laravel-filament-redirect-manager'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/missing-page-redirector.php',
             'missing-page-redirector'
         );
+    }
+
+    /**
+     * Merges the specified config from another package. Does the opposite of mergeConfigFrom().
+     */
+    protected function extendConfigFrom($path, $key)
+    {
+        $config = $this->app['config']->get($key, []);
+
+        $this->app['config']->set($key, array_merge($config, require $path));
     }
 }

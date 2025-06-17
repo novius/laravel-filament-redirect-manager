@@ -23,7 +23,7 @@ class LaravelFilamentRedirectManager implements Plugin
     public static function make(): self
     {
         $instance = new self;
-        $config = config('laravel-filament-redirect-manager', []);
+        $config = config('missing-page-redirector', []);
         $instance->overrideResources($config['resources']);
 
         return $instance;
