@@ -49,7 +49,14 @@ class RedirectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('from')
             ->columns([
+                TextColumn::make('id')
+                    ->label(trans('laravel-filament-redirect-manager::redirect.id'))
+                    ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('from')
                     ->label(trans('laravel-filament-redirect-manager::redirect.from'))
                     ->sortable()
@@ -61,13 +68,13 @@ class RedirectResource extends Resource
                     ->searchable(),
 
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label(trans('laravel-filament-redirect-manager::redirect.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('updated_at')
-                    ->label('Updated')
+                    ->label(trans('laravel-filament-redirect-manager::redirect.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
