@@ -10,6 +10,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages;
 use Novius\LaravelFilamentRedirectManager\Models\Redirect;
@@ -85,7 +86,7 @@ class RedirectResource extends Resource
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ])
+            ], ActionsPosition::BeforeColumns)
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
