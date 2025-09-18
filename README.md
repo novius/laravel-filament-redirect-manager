@@ -9,7 +9,7 @@ This package provides an interface to manage redirects with [Laravel Filament Re
 
 ## Requirements
 
-* Laravel Filament >= 3.3
+* Laravel Filament >= 4
 * Laravel >= 11.0
 * PHP >= 8.2
 

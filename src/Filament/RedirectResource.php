@@ -2,15 +2,18 @@
 
 namespace Novius\LaravelFilamentRedirectManager\Filament;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\ListRedirectResource;
+use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\CreateRedirectResource;
+use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\EditRedirectResource;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages;
 use Novius\LaravelFilamentRedirectManager\Models\Redirect;
@@ -21,16 +24,16 @@ class RedirectResource extends Resource
 {
     protected static ?string $model = Redirect::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-link';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-link';
 
     public static function getModelLabel(): string
     {
         return trans('laravel-filament-redirect-manager::redirect.redirect');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->components([
             TextInput::make('from')
                 ->label(trans('laravel-filament-redirect-manager::redirect.from'))
                 ->helperText(trans('laravel-filament-redirect-manager::redirect.relative_url_help'))
@@ -83,11 +86,11 @@ class RedirectResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ], ActionsPosition::BeforeColumns)
-            ->bulkActions([
+            ], RecordActionsPosition::BeforeColumns)
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
@@ -97,9 +100,9 @@ class RedirectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRedirectResource::route('/'),
-            'create' => Pages\CreateRedirectResource::route('/create'),
-            'edit' => Pages\EditRedirectResource::route('/{record}/edit'),
+            'index' => ListRedirectResource::route('/'),
+            'create' => CreateRedirectResource::route('/create'),
+            'edit' => EditRedirectResource::route('/{record}/edit'),
         ];
     }
 
