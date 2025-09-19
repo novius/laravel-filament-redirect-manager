@@ -9,6 +9,6 @@ return [
     'redirector' => \Novius\LaravelFilamentRedirectManager\Redirector\DatabaseRedirector::class,
 
     'resources' => [
-        'RedirectResource' => \Novius\LaravelFilamentRedirectManager\Filament\RedirectResource::class,
+        'RedirectResource' => \Novius\LaravelFilamentRedirectManager\Filament\Redirects\RedirectResource::class,
     ],
 ];

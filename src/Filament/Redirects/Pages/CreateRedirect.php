@@ -1,12 +1,12 @@
 <?php
 
-namespace Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages;
+namespace Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages;
 
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource;
+use Filament\Resources\Pages\CreateRecord;
+use Novius\LaravelFilamentRedirectManager\Filament\Redirects\RedirectResource;
 
-class ListRedirectResource extends ListRecords
+class CreateRedirect extends CreateRecord
 {
     protected static string $resource = RedirectResource::class;
 

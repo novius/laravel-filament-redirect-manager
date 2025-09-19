@@ -1,14 +1,14 @@
 <?php
 
-namespace Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages;
+namespace Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages;
 
 use Filament\Actions\DeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource;
+use Novius\LaravelFilamentRedirectManager\Filament\Redirects\RedirectResource;
 
-class EditRedirectResource extends EditRecord
+class EditRedirect extends EditRecord
 {
     protected static string $resource = RedirectResource::class;
 

@@ -1,21 +1,20 @@
 <?php
 
-namespace Novius\LaravelFilamentRedirectManager\Filament;
+namespace Novius\LaravelFilamentRedirectManager\Filament\Redirects;
 
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\ListRedirectResource;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\CreateRedirectResource;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages\EditRedirectResource;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
-use Novius\LaravelFilamentRedirectManager\Filament\RedirectResource\Pages;
+use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\CreateRedirect;
+use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\EditRedirect;
+use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\ListRedirect;
 use Novius\LaravelFilamentRedirectManager\Models\Redirect;
 use Novius\LaravelFilamentRedirectManager\Rules\UrlAbsoluteOrRelative;
 use Novius\LaravelFilamentRedirectManager\Rules\UrlRelative;
@@ -24,7 +23,7 @@ class RedirectResource extends Resource
 {
     protected static ?string $model = Redirect::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-link';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-link';
 
     public static function getModelLabel(): string
     {
@@ -100,9 +99,9 @@ class RedirectResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListRedirectResource::route('/'),
-            'create' => CreateRedirectResource::route('/create'),
-            'edit' => EditRedirectResource::route('/{record}/edit'),
+            'index' => ListRedirect::route('/'),
+            'create' => CreateRedirect::route('/create'),
+            'edit' => EditRedirect::route('/{record}/edit'),
         ];
     }
 
