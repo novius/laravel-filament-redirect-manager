@@ -10,7 +10,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
 use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\CreateRedirect;
 use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\EditRedirect;
@@ -88,7 +87,7 @@ class RedirectResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ], RecordActionsPosition::BeforeColumns)
+            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
