@@ -35,17 +35,17 @@ class RedirectResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationLabel', static::getPluralModelLabel());
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationLabel') ??static::getPluralModelLabel();
     }
 
     public static function getNavigationIcon(): string|\BackedEnum|null
     {
-        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationIcon', 'heroicon-o-link');
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationIcon') ?? 'heroicon-o-link';
     }
 
     public static function shouldRegisterNavigation(): bool
     {
-        return config('laravel-filament-redirect-manager.filament.RedirectResource.shouldRegisterNavigation', true);
+        return (bool)config('laravel-filament-redirect-manager.filament.RedirectResource.shouldRegisterNavigation', true);
     }
 
     public static function getModelLabel(): string

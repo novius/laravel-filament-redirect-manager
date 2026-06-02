@@ -19,7 +19,7 @@ return [
     'filament' => [
         'RedirectResource' => [
             'navigationLabel' => null,
-            'navigationIcon' => null,
+            'navigationIcon' => 'heroicon-o-link',
             'navigationSort' => null,
             'navigationGroup' => null,
             'shouldRegisterNavigation' => true,
