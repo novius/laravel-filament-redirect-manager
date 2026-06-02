@@ -17,16 +17,45 @@ use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\ListRedirect;
 use Novius\LaravelFilamentRedirectManager\Models\Redirect;
 use Novius\LaravelFilamentRedirectManager\Rules\UrlAbsoluteOrRelative;
 use Novius\LaravelFilamentRedirectManager\Rules\UrlRelative;
+use UnitEnum;
 
 class RedirectResource extends Resource
 {
     protected static ?string $model = Redirect::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-link';
+    public static function getNavigationGroup(): string|UnitEnum|null
+    {
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationGroup');
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationSort');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationLabel', static::getPluralModelLabel());
+    }
+
+    public static function getNavigationIcon(): string|\BackedEnum|null
+    {
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.navigationIcon', 'heroicon-o-link');
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config('laravel-filament-redirect-manager.filament.RedirectResource.shouldRegisterNavigation', true);
+    }
 
     public static function getModelLabel(): string
     {
         return trans('laravel-filament-redirect-manager::redirect.redirect');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return trans('laravel-filament-redirect-manager::redirect.redirects');
     }
 
     public static function form(Schema $schema): Schema

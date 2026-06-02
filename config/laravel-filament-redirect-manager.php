@@ -15,4 +15,14 @@ return [
     'resources' => [
         'RedirectResource' => RedirectResource::class,
     ],
+
+    'filament' => [
+        'RedirectResource' => [
+            'navigationLabel' => null,
+            'navigationIcon' => null,
+            'navigationSort' => null,
+            'navigationGroup' => null,
+            'shouldRegisterNavigation' => true,
+        ],
+    ],
 ];
