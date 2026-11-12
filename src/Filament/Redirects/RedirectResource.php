@@ -6,10 +6,12 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\CreateRedirect;
 use Novius\LaravelFilamentRedirectManager\Filament\Redirects\Pages\EditRedirect;
@@ -61,6 +63,13 @@ class RedirectResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
+            Select::make('locale')
+                ->label(trans('laravel-filament-redirect-manager::redirect.locale'))
+                ->helperText(trans('laravel-filament-redirect-manager::redirect.locale_help'))
+                ->options(fn (): array => self::locales())
+                ->placeholder(trans('laravel-filament-redirect-manager::redirect.all_locales'))
+                ->visible(fn (): bool => self::locales() !== []),
+
             TextInput::make('from')
                 ->label(trans('laravel-filament-redirect-manager::redirect.from'))
                 ->helperText(trans('laravel-filament-redirect-manager::redirect.relative_url_help'))
@@ -73,7 +82,9 @@ class RedirectResource extends Resource
                 ->helperText(trans('laravel-filament-redirect-manager::redirect.url_help'))
                 ->required()
                 ->maxLength(self::maxLengthUrl())
-                ->rules(['string', new UrlAbsoluteOrRelative, 'different:from']),
+                ->rules(['string', new UrlAbsoluteOrRelative])
+                // Not the rule `different:from`: Filament validates the fields under `data.`
+                ->different('from'),
         ]);
     }
 
@@ -87,6 +98,13 @@ class RedirectResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('locale')
+                    ->label(trans('laravel-filament-redirect-manager::redirect.locale'))
+                    ->formatStateUsing(fn (?string $state): string => self::locales()[$state] ?? (string) $state)
+                    ->placeholder(trans('laravel-filament-redirect-manager::redirect.all_locales'))
+                    ->sortable()
+                    ->visible(fn (): bool => self::locales() !== []),
 
                 TextColumn::make('from')
                     ->label(trans('laravel-filament-redirect-manager::redirect.from'))
@@ -111,7 +129,10 @@ class RedirectResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('locale')
+                    ->label(trans('laravel-filament-redirect-manager::redirect.locale'))
+                    ->options(fn (): array => self::locales())
+                    ->visible(fn (): bool => self::locales() !== []),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -131,6 +152,16 @@ class RedirectResource extends Resource
             'create' => CreateRedirect::route('/create'),
             'edit' => EditRedirect::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Locales of the redirects (config `locales`), empty when the redirects have no locale.
+     *
+     * @return array<string, string>
+     */
+    public static function locales(): array
+    {
+        return (array) config('laravel-filament-redirect-manager.locales', []);
     }
 
     public static function getGloballySearchableAttributes(): array

@@ -9,7 +9,8 @@ use Illuminate\Support\Carbon;
 /**
  * Class RedirectResource
  *
- * @property string $id
+ * @property int $id
+ * @property string|null $locale
  * @property string $from
  * @property string $to
  * @property Carbon|null $created_at
@@ -28,6 +29,7 @@ class Redirect extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'locale',
         'from',
         'to',
     ];

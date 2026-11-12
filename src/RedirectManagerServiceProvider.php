@@ -21,6 +21,9 @@ class RedirectManagerServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        // Options of the package itself (locales of the redirects, Filament): overridable by the published config
+        $this->mergeConfigFrom(__DIR__.'/../config/laravel-filament-redirect-manager.php', 'laravel-filament-redirect-manager');
+
         $this->extendConfigFrom(
             __DIR__.'/../config/laravel-filament-redirect-manager.php',
             'missing-page-redirector'
